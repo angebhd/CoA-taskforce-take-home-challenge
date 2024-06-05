@@ -17,12 +17,17 @@ div.img{
     position: relative;
     max-width: 293px;
     max-height: 588px;
+    overflow: hidden;
 
 }
 
-/* img{
-
-} */
+img{
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+div.img:hover img {
+    filter: blur(5px) grayscale(100%);
+    transform: scale(1.1);
+}
 div.overlay {
     position: absolute;
     width: 100%;
@@ -30,9 +35,12 @@ div.overlay {
     top: 0;
     left: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    transition: opacity 0.4s ease, background-color 0.4s ease;
 
-
-
+}
+div.overlay:hover{
+    background-color: black;
+    opacity: 0.7;
 }
 div.info{
     position: absolute;
@@ -54,4 +62,15 @@ p.location{
     font-weight: 400;
     font-size: 12px;
     /* margin: 0; */
+}
+p.more{
+    font-family: 'Poppins', sans-serif;
+    color:aqua;
+    font-size:15px;
+    height: 0;
+    transition: height 3s ease-in,;
+}
+
+p.show {
+    height: auto;
 }
