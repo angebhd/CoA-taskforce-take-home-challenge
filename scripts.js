@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const divContainers = document.querySelectorAll('.img');
-    
-    divContainers.forEach(function (divContainer){
+    const viewer = document.querySelector('.view-full');
+    const fullImage = document.querySelector('.full-image');
+    const closeButton = document.querySelector('.close-btn');
+
+    divContainers.forEach(function (divContainer) {
         const textContainer = divContainer.querySelector('.info');
 
         divContainer.addEventListener('mouseover', function () {
@@ -13,10 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 textContainer.appendChild(moreElement);
 
                 moreElement.classList.add('show');
-                
+
             }
         });
-    
 
         divContainer.addEventListener('mouseout', function () {
             const moreElement = document.querySelector('.more');
@@ -24,5 +26,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 textContainer.removeChild(moreElement);
             }
         });
+
+        divContainer.addEventListener('click', function () {
+            const fullSrc = this.getAttribute('data-full');
+            fullImage.src = fullSrc;
+            // console.log(fullSrc);
+            viewer.classList.add('show-full');
+        });
+    });
+    closeButton.addEventListener('click', function () {
+        viewer.classList.remove('show-full');
+        fullImage.src = '';
     });
 });
+
+
