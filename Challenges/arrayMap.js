@@ -20,11 +20,9 @@ function getSubArray(arr, target) {
     return false;
 }
 
+
 const args = process.argv.slice(2);
 const arr = args.slice(0, args.length - 1).map(Number);
-console.log(arr);
 const target = Number(args[args.length - 1]);
-console.log(target);
-
 
 console.log(getSubArray(arr, target));
