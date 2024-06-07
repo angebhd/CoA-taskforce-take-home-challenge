@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         divContainer.addEventListener('click', function () {
             const fullSrc = this.getAttribute('data-full');
             fullImage.src = fullSrc;
-            // console.log(fullSrc);
             viewer.classList.add('show-full');
         });
     });

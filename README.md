@@ -34,9 +34,9 @@ The coding challenge is made of three tasks
         - The elements in the array and the target sum will be between -1,000,000,000 and 1,000,000,000.
     - Expected complexity time O(n), where n is the length of the string
     - Expected complexity space O(1)
-3. Codding challenge 2: String Transformation
+3. Coding challenge 2: String Transformation
     - Problem statements:
-        - GGiven a string, transform it based on the following rules:
+        - Given a string, transform it based on the following rules:
             - If the length of the string is divisible by 3, reverse the entire string
             - If the length of the string is divisible by 5, replace each character with its ASCII code
             - If the length of the string is divisible by both 3 and 5 (i.e., divisible by 15), perform both operations in the order specified above
@@ -89,7 +89,9 @@ node arrayMap.js <array elements> <target sum>
 ```javascript
 node arrayMap.js 4 6 3 7 3 7 2 10
 ```
-- Note: The last number is considered as the targeted sum
+- Output:true
+    - sum of sub array [3,7] is 10
+#### --> Note: __The last number is considered as the targeted sum__
 3. **String Transformation** : execute this command
 ``` javascript
 node stringTransform.js "Your text"
@@ -98,7 +100,7 @@ node stringTransform.js "Your text"
 ```javascript
 node stringTransform.js Chocolate Chip Cookie
 ```
-- Note: The quotes are optional
+#### --> Note: The quotes are optional
 
 
 # III. Approch used
@@ -125,13 +127,35 @@ Plain HTML/CSS/JS was used to create this UI.
 - Here's a step-by-step explanation of the approach:
     1. Initialize variables: I start by initializing a `sum` variable to keep track of the running sum, and a Map called `sumMap`. I also set an initial entry in the sumMap with `sumMap.set(0, -1)`. This step is crucial for handling the case where the target sum is 0, and the array contains a subarray with all zeros.
     2. Iterate through the array: We iterate through the array using a for loop with an index `currIndex`
-    3. Update running sum: At each index currIndex, we update the sum by adding the current element arr[currIndex] to it.
-    4. Check for the target sum: After updating the sum, we check if sum - target exists in the sumMap. If it does, it means that there exists a subarray from the index stored in sumMap[sum - target] + 1 to the current index currIndex that sums up to target. In this case, we return true
-    5. Update the sumMap: If sum - target doesn't exist in the sumMap, we check if the current sum exists in the sumMap. If it doesn't, we add an entry sumMap.set(sum, currIndex). This step is crucial for handling negative target sums, as it ensures that we don't overwrite existing entries in the sumMap
+    3. Update running sum: At each index currIndex, we update the sum by adding the current element `arr[currIndex]` to it.
+    4. Check for the target sum: After updating the sum, we check if sum - target exists in the sumMap. If it does, it means that there exists a subarray from the index stored in `sumMap[sum - target] + 1` to the current index currIndex that sums up to target. In this case, we return `true`
+    5. Update the sumMap: If sum - target doesn't exist in the sumMap, we check if the current sum exists in the sumMap. If it doesn't, we add an entry `sumMap.set(sum, currIndex)`. This step is crucial for handling negative target sums, as it ensures that we don't overwrite existing entries in the sumMap
     6. Return false if no subarray found: If we reach the end of the loop without finding a subarray that sums up to target, we return false
 - Time and Space Complexity
     - Time Complexity: The algorithm iterates through the array once, so the time complexity is O(n), where n is the length of the array
     - Space Complexity: The algorithm uses a Map to store the running sums and their indices. In the worst case, we may need to store all the running sums, so the space complexity is O(n), where n is the length of the input array.
+        - To get a space complexity of O(1), we can use this small script : 
+```javascript
+function getSubArray(arr, target) {
+    for (let start = 0; start < arr.length; start++) {
+        let sum = 0;
+        for (let end = start; end < arr.length; end++) {
+            sum += arr[end];
+            if (sum === target) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const args = process.argv.slice(2);
+const arr = args.slice(0, args.length - 1).map(Number);
+const target = Number(args[args.length - 1]);
+
+console.log(getSubArray(arr, target));
+```
+        But this function do not work properly with negative numbers
 
 - Edge cases:
     - Negative numbers: The solution works correctly for arrays containing negative numbers.
@@ -166,6 +190,10 @@ Plain HTML/CSS/JS was used to create this UI.
         - If the length is divisible by 5 but not by 15, only the ASCII code transformation is applied using the steps mentioned in step 3
     5. Returning the Transformed String:
         - Return transformed string or empty one
-#### This modular approach leverages techniques like splitting, reversing, joining, mapping over arrays, and using modulus to determine transformations based on length. It breaks down the problem for easier understanding and maintenance
+- This modular approach leverages techniques like splitting, reversing, joining, mapping over arrays, and using modulus to determine transformations based on length. It breaks down the problem for easier understanding and maintenance
+- Time and Space Complexity
+    - Time Complexity: The overall time complexity of the program is O(n), where n is the length of the input string.
+    - Space Complexity: The overall space complexity of the program is O(n), where n is the length of the input string.
+
 
  # By Ange Asifiwe BUHENDWA
